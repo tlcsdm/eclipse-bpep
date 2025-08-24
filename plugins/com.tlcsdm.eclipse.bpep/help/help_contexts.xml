@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<contexts>
-   <context id="prefs_fullscreen" title="Fullscreen">
-      <description>Fullscreen preference page</description>
-      <topic href="help/02_preferences.html" label="Preferences - Fullscreen"/>
-   </context>
-</contexts>

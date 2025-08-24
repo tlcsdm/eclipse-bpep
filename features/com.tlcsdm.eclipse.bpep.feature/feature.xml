@@ -7,7 +7,7 @@
       plugin="com.tlcsdm.eclipse.bpep">
 
    <description>
-      With this small plugin Eclipse and RCP Programs based on Eclipse can run in full screen mode, so that you can have more space to edit your programs.
+      Builder Pattern Eclipse Plugin
    </description>
 
    <copyright>
@@ -296,7 +296,7 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <url>
       <update label="%updateSiteName" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/master/update_site/"/>
-      <discovery label="Fullscreen Update Site" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/master/update_site/"/>
+      <discovery label="Builder Pattern Eclipse Plugin Update Site" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/master/update_site/"/>
    </url>
 
    <requires>

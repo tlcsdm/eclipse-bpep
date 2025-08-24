@@ -1,94 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.menus">
-     <menuContribution
-         locationURI="menu:window?after=additions">
-       <command
-            commandId="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
-            label="%fullScreen"
-            icon="icons/icon16.png"
-            style="push">
-         <visibleWhen>
-            <with variable="activeWorkbenchWindow"/>
-         </visibleWhen>
-       </command>
-     </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            categoryId="org.eclipse.ui.category.window"
-            description="%fullScreenCommandDesc"
-            id="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
-            defaultHandler="com.tlcsdm.eclipse.fullscreen.FullScreenActionDelegate"
-            name="%fullScreenCommand">
-      </command>
-      <command
-            categoryId="org.eclipse.ui.category.window"
-            description="%escCommandDesc"
-            id="com.tlcsdm.eclipse.fullscreen.escCommand"
-            defaultHandler="com.tlcsdm.eclipse.fullscreen.EscActionDelegate"
-            name="%escCommand">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
+   <extension point="org.eclipse.ui.bindings">
       <key
-            commandId="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
-            contextId="org.eclipse.ui.contexts.dialogAndWindow"
+            commandId="com.tlcsdm.eclipse.bpep.invoke"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+M3+Z">
-      </key>  
-      <key
-            commandId="com.tlcsdm.eclipse.fullscreen.escCommand"
-            contextId="org.eclipse.ui.contexts.dialogAndWindow"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="ESC">
+            sequence="M1+M3+P">
       </key>
    </extension>
-   <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.ui.preferencePages.Workbench"
-            class="com.tlcsdm.eclipse.fullscreen.FullScreenPreferencePage"
-            id="com.tlcsdm.eclipse.fullscreen.fullScreenPage"
-            name="%fullScreenPreferenceNode">
-      </page>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="com.tlcsdm.eclipse.fullscreen.FullScreenPreferenceInitializer">
-      </initializer>
-   </extension>
-   <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="com.tlcsdm.eclipse.fullscreen.Activator">
-      </startup>
-   </extension>
-
-	<extension point="org.eclipse.help.toc">
-		<toc file="help/help_toc.xml" primary="true"/>
-	</extension>
-	   <extension
-          point="org.eclipse.help.contexts">
-      <contexts
-            file="help/help_contexts.xml"
-            plugin="com.tlcsdm.eclipse.fullscreen">
-      </contexts>
+   <extension point="org.eclipse.ui.commands">
+      <command id="com.tlcsdm.eclipse.bpep.invoke"
+               name="Generate Builder Pattern..."
+               description="Generate Builder Pattern code">
+      </command>
    </extension>
    
-   <extension
-    point="org.eclipse.ui.perspectiveExtensions">
-    <perspectiveExtension
-        targetID="*">
-        <editorOnboardingCommand
-            id="com.tlcsdm.eclipse.fullscreen.fullscreenCommand">
-        </editorOnboardingCommand>
-    </perspectiveExtension>
+   <extension point="org.eclipse.ui.handlers">
+   <handler
+			class="com.tlcsdm.eclipse.bpep.handler.GenerateBuilderHandler"
+			commandId="com.tlcsdm.eclipse.bpep.invoke">
+   </handler>
+   </extension>
+   
+   <extension point="org.eclipse.ui.menus">
+   <!-- 在 Java 编辑器 Source 菜单下添加 -->
+   <menuContribution
+         locationURI="menu:org.eclipse.jdt.ui.source.menu?after=generateGroup">
+      <command
+            commandId="com.tlcsdm.eclipse.bpep.invoke"
+            label="Generate Builder Pattern Code..."
+            style="push">
+      </command>
+   </menuContribution>
+
+   <!-- 在 Java 编辑器上下文菜单添加 -->
+   <menuContribution
+         locationURI="popup:org.eclipse.jdt.ui.source.menu?after=generateGroup">
+      <command
+            commandId="com.tlcsdm.eclipse.bpep.invoke"
+            label="Generate Builder Pattern Code..."
+            style="push">
+      </command>
+   </menuContribution>
    </extension>
 
 </plugin>
