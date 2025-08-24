@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+     <menuContribution
+         locationURI="menu:window?after=additions">
+       <command
+            commandId="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
+            label="%fullScreen"
+            icon="icons/icon16.png"
+            style="push">
+         <visibleWhen>
+            <with variable="activeWorkbenchWindow"/>
+         </visibleWhen>
+       </command>
+     </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="%fullScreenCommandDesc"
+            id="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
+            defaultHandler="com.tlcsdm.eclipse.fullscreen.FullScreenActionDelegate"
+            name="%fullScreenCommand">
+      </command>
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="%escCommandDesc"
+            id="com.tlcsdm.eclipse.fullscreen.escCommand"
+            defaultHandler="com.tlcsdm.eclipse.fullscreen.EscActionDelegate"
+            name="%escCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.tlcsdm.eclipse.fullscreen.fullscreenCommand"
+            contextId="org.eclipse.ui.contexts.dialogAndWindow"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+Z">
+      </key>  
+      <key
+            commandId="com.tlcsdm.eclipse.fullscreen.escCommand"
+            contextId="org.eclipse.ui.contexts.dialogAndWindow"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="ESC">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="com.tlcsdm.eclipse.fullscreen.FullScreenPreferencePage"
+            id="com.tlcsdm.eclipse.fullscreen.fullScreenPage"
+            name="%fullScreenPreferenceNode">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.tlcsdm.eclipse.fullscreen.FullScreenPreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.tlcsdm.eclipse.fullscreen.Activator">
+      </startup>
+   </extension>
+
+	<extension point="org.eclipse.help.toc">
+		<toc file="help/help_toc.xml" primary="true"/>
+	</extension>
+	   <extension
+          point="org.eclipse.help.contexts">
+      <contexts
+            file="help/help_contexts.xml"
+            plugin="com.tlcsdm.eclipse.fullscreen">
+      </contexts>
+   </extension>
+   
+   <extension
+    point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension
+        targetID="*">
+        <editorOnboardingCommand
+            id="com.tlcsdm.eclipse.fullscreen.fullscreenCommand">
+        </editorOnboardingCommand>
+    </perspectiveExtension>
+   </extension>
+
+</plugin>
