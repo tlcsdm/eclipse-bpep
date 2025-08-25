@@ -8,7 +8,7 @@ The Builder Pattern was first introduced by Joshua Bloch at JavaOne 2007. It's a
 Fork of the bpep plugin. Original source: https://github.com/henningjensen/bpep
 
 ## Use
-In the eclipse java editor window, right click and select Source -> Generate Builder Pattern Code.
+In the eclipse java editor window, right click and select Source -> Generate Builder Pattern Code or Ctrl + Alt + P.
 
 ![screenshot](https://raw.github.com/tlcsdm/eclipse-bpep/master/plugins/com.tlcsdm.eclipse.bpep/images/usage-context-menu-option.jpg)
 
