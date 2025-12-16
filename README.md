@@ -2,6 +2,8 @@
 
 This project is a Eclipse plugin that automates the writing of these builders. With just two clicks you can generate all the builder code you need.
 
+Now Support Eclipse 2024-06 and later, Mac OS X, Linux (with nautilus) and Windows.
+
 ## About
 The Builder Pattern was first introduced by Joshua Bloch at JavaOne 2007. It's a pattern for class creation and helps getting rid of ugly constructors, constructor telescoping and increases the general readability of your code.
 
