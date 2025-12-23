@@ -295,8 +295,8 @@ version(s), and exceptions or additional permissions here}.&quot;
    </license>
 
    <url>
-      <update label="%updateSiteName" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/master/update_site/"/>
-      <discovery label="Builder Pattern Eclipse Plugin Update Site" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/master/update_site/"/>
+      <update label="%updateSiteName" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/update_site/"/>
+      <discovery label="Builder Pattern Eclipse Plugin Update Site" url="https://raw.githubusercontent.com/tlcsdm/eclipse-bpep/update_site/"/>
    </url>
 
    <requires>
