@@ -8,6 +8,8 @@ import java.io.StringWriter;
 import java.util.List;
 
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IBuffer;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IField;
@@ -26,12 +28,14 @@ import org.eclipse.text.edits.TextEdit;
 
 public class BuilderGenerator implements Generator {
 
+	private static final ILog LOGGER = Platform.getLog(BuilderGenerator.class);
 	private static final String BUILDER_METHOD_PARAMETER_SUFFIX = "Param";
 
 	private final boolean createBuilderConstructor;
 	private final boolean createCopyConstructor;
 	private final boolean formatSource;
 
+	@Override
 	public void generate(ICompilationUnit cu, List<IField> fields) {
 
 		try {
@@ -59,7 +63,7 @@ public class BuilderGenerator implements Generator {
 				createPrivateBuilderConstructor(pw, clazz, fields);
 				pw.println("}");
 			} else {
-				createClassBuilderConstructor(pw, clazz, fields);
+				createClassBuilderConstructor(pw, clazz);
 				pw.println("}");
 				createClassConstructor(pw, clazz, fields);
 			}
@@ -80,12 +84,8 @@ public class BuilderGenerator implements Generator {
 			} else {
 				buffer.replace(pos, 0, sw.toString());
 			}
-		} catch (JavaModelException e) {
-			e.printStackTrace();
-		} catch (MalformedTreeException e) {
-			e.printStackTrace();
-		} catch (BadLocationException e) {
-			e.printStackTrace();
+		} catch (JavaModelException | MalformedTreeException | BadLocationException e) {
+			LOGGER.error("Failed to generate builder pattern code", e);
 		}
 	}
 
@@ -128,7 +128,7 @@ public class BuilderGenerator implements Generator {
 		pw.println("}");
 	}
 
-	private void createClassBuilderConstructor(PrintWriter pw, IType clazz, List<IField> fields) {
+	private void createClassBuilderConstructor(PrintWriter pw, IType clazz) {
 		String clazzName = clazz.getElementName();
 		pw.println("public " + clazzName + " build(){");
 		pw.println("return new " + clazzName + "(this);\n}");

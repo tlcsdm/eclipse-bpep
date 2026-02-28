@@ -4,6 +4,8 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.ui.IWorkingCopyManager;
 import org.eclipse.jdt.ui.JavaUI;
@@ -16,6 +18,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import com.tlcsdm.eclipse.bpep.view.CreateDialog;
 
 public class GenerateBuilderHandler extends AbstractHandler {
+
+	private static final ILog LOGGER = Platform.getLog(GenerateBuilderHandler.class);
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -41,7 +45,7 @@ public class GenerateBuilderHandler extends AbstractHandler {
 		} catch (CoreException e) {
 			MessageDialog.openError(HandlerUtil.getActiveShell(event), "Error",
 					"Failed to generate builder: " + e.getMessage());
-			e.printStackTrace();
+			LOGGER.error("Failed to generate builder", e);
 		} finally {
 			manager.disconnect(editorInput);
 		}

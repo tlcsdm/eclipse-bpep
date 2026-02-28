@@ -13,7 +13,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -74,27 +73,25 @@ public class CreateDialog extends AbstractModalDialog {
 		final Button cancelButton = new Button(shell, SWT.PUSH);
 		cancelButton.setText("Cancel");
 
-		Listener clickListener = new Listener() {
-			public void handleEvent(Event event) {
-				if (event.widget == executeButton) {
+		Listener clickListener = event -> {
+			if (event.widget == executeButton) {
 
-					List<IField> selectedFields = new ArrayList<IField>();
-					for (Button button : fieldButtons) {
-						if (button.getSelection()) {
-							selectedFields.add((IField) button.getData());
-						}
+				List<IField> selectedFields = new ArrayList<>();
+				for (Button button : fieldButtons) {
+					if (button.getSelection()) {
+						selectedFields.add((IField) button.getData());
 					}
-
-					Generator generator = new BuilderGenerator.Builder() //
-							.createBuilderConstructor(createBuilderConstructor.getSelection()) //
-							.createCopyConstructor(createCopyConstructorButton.getSelection()) //
-							.formatSource(formatSourceButton.getSelection()) //
-							.build();
-					generator.generate(compilationUnit, selectedFields);
-					shell.dispose();
-				} else {
-					shell.dispose();
 				}
+
+				Generator generator = new BuilderGenerator.Builder() //
+						.createBuilderConstructor(createBuilderConstructor.getSelection()) //
+						.createCopyConstructor(createCopyConstructorButton.getSelection()) //
+						.formatSource(formatSourceButton.getSelection()) //
+						.build();
+				generator.generate(compilationUnit, selectedFields);
+				shell.dispose();
+			} else {
+				shell.dispose();
 			}
 		};
 
@@ -108,7 +105,7 @@ public class CreateDialog extends AbstractModalDialog {
 
 	private List<Button> createFieldSelectionCheckboxes(final ICompilationUnit compilationUnit, Group fieldGroup) {
 		List<IField> fields = Resolver.findAllFields(compilationUnit);
-		final List<Button> fieldButtons = new ArrayList<Button>();
+		final List<Button> fieldButtons = new ArrayList<>();
 		for (IField field : fields) {
 			Button button = new Button(fieldGroup, SWT.CHECK);
 			button.setText(Resolver.getName(field) + "(" + Resolver.getType(field) + ")");
